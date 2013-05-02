@@ -14,9 +14,21 @@ Django recommends that tags never raise errors in the ``Node.render`` method
 but since sorl-thumbnail is such a complex tag we will need to have more
 debugging available.
 
+``THUMBNAIL_URL_TIMEOUT``
+=========================
+
+- Default: ``None``
+
+Timeout, in seconds, to use when retrieving images with urllib2.
+
 
 ``THUMBNAIL_BACKEND``
 =====================
+
+- Default: ``0``
+
+Gaussian blur radius.  Large numbers will blur the thumbnail more.
+
 
 - Default: ``'sorl.thumbnail.base.ThumbnailBackend'``
 
@@ -25,6 +37,8 @@ default one but just in case you would like to generate thumbnails filenames
 differently or need some special functionality you can override this and use
 your own implementation.
 
+``THUMBNAIL_BLUR``
+==================
 
 ``THUMBNAIL_KVSTORE``
 =====================
@@ -202,6 +216,15 @@ Default image format, supported formats are: ``'JPEG'``, ``'PNG'``. This also im
 sets the filename extension. This can be overridden by individual options.
 
 
+``THUMBNAIL_PRESERVE_FORMAT``
+====================
+
+- Default: ``'False'``
+
+If set to True, this will override ``'THUMBNAIL_FORMAT'`` and preserve the 
+original filetype only if it's either ``'JPG'`` or ``'PNG'```. 
+
+
 ``THUMBNAIL_COLORSPACE``
 ========================
 
@@ -236,6 +259,14 @@ overridden by individual options.
 
 Saves jpeg thumbnails as progressive jpegs. This can be overridden by individual
 options.
+
+
+``THUMBNAIL_LAZY_FILL_EMPTY``
+===================
+
+- Default: ``False``
+
+Lazy fill empty thumbnail like ``'THUMBNAIL_DUMMY'``
 
 
 ``THUMBNAIL_DUMMY``
