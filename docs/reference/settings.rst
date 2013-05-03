@@ -22,13 +22,16 @@ debugging available.
 Timeout, in seconds, to use when retrieving images with urllib2.
 
 
-``THUMBNAIL_BACKEND``
+``THUMBNAIL_BLUR``
 =====================
 
 - Default: ``0``
 
 Gaussian blur radius.  Large numbers will blur the thumbnail more.
 
+
+``THUMBNAIL_BACKEND``
+==================
 
 - Default: ``'sorl.thumbnail.base.ThumbnailBackend'``
 
@@ -37,8 +40,6 @@ default one but just in case you would like to generate thumbnails filenames
 differently or need some special functionality you can override this and use
 your own implementation.
 
-``THUMBNAIL_BLUR``
-==================
 
 ``THUMBNAIL_KVSTORE``
 =====================
