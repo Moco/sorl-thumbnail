@@ -29,7 +29,8 @@ def safe_filter(error_output=''):
             except Exception:
                 if settings.THUMBNAIL_DEBUG:
                     raise
-                logger.error('Thumbnail filter failed:', exc_info=sys.exc_info())
+                logger.error('Thumbnail filter failed:',
+                              exc_info=sys.exc_info())
                 return error_output
         return wrapper
     return inner
@@ -102,8 +103,10 @@ class ThumbnailNode(ThumbnailNodeBase):
                 options.update(value)
             else:
                 options[key] = value
-        # logic arranged to ensure we're not doing any unecessary calls to os.path.exists
-        if file_ and (not lazy_fill or lazy_fill and os.path.exists(file_.path)):
+        # logic arranged to ensure we're not doing any unecessary calls to
+        # os.path.exists
+        if file_ and (not lazy_fill or
+                      lazy_fill and os.path.exists(file_.path)):
             thumbnail = default.backend.get_thumbnail(
                 file_, geometry, **options
                 )
@@ -112,7 +115,7 @@ class ThumbnailNode(ThumbnailNodeBase):
         elif settings.THUMBNAIL_DUMMY or lazy_fill:
             thumbnail = DummyImageFile(geometry)
         else:
-           if self.nodelist_empty:
+            if self.nodelist_empty:
                 return self.nodelist_empty.render(context)
             else:
                 return ''
@@ -160,7 +163,8 @@ def margin(file_, geometry_string):
     """
     Returns the calculated margin for an image and geometry
     """
-    if not file_ or settings.THUMBNAIL_DUMMY or isinstance(file_, DummyImageFile):
+    if (not file_ or settings.THUMBNAIL_DUMMY or
+        isinstance(file_, DummyImageFile)):
         return 'auto'
     margin = [0, 0, 0, 0]
     image_file = default.kvstore.get_or_set(ImageFile(file_))
@@ -175,7 +179,8 @@ def margin(file_, geometry_string):
     margin[2] = ey / 2
     if ey % 2:
         margin[2] += 1
-    return ' '.join([ '%spx' % n for n in margin ])
+    return ' '.join(['%spx' % n for n in margin])
+
 
 @safe_filter(error_output='auto')
 @register.filter
@@ -192,5 +197,5 @@ def background_margin(file_, geometry_string):
     margin[0] = ex / 2
     ey = y - image_file.y
     margin[1] = ey / 2
-    return ' '.join([ '%spx' % n for n in margin ])
-
+    return ' '.join(['%spx' % n for n in margin])
+#
